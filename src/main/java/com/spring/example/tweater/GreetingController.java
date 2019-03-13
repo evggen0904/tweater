@@ -23,8 +23,4 @@ public class GreetingController {
 
         return "main";
     }
-
-    public String test() {
-        return "";
-    }
 }
