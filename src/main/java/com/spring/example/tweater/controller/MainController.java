@@ -1,4 +1,4 @@
-package com.spring.example.tweater;
+package com.spring.example.tweater.controller;
 
 import com.spring.example.tweater.domain.Message;
 import com.spring.example.tweater.repository.MessageRepo;
@@ -11,18 +11,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class GreetingController {
+public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name,
-                           Map<String, String> model) {
-        model.put("name", name);
+    @GetMapping("/")
+    public String greeting(Map<String, String> model) {
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Map<String, Object> model) {
         Iterable<Message> allMessages = messageRepo.findAll();
         model.put("messages", allMessages);
@@ -30,7 +28,7 @@ public class GreetingController {
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String addMessage(@RequestParam String text,
                              @RequestParam String tag,
                              Map<String, Object> model) {
@@ -43,7 +41,7 @@ public class GreetingController {
         return "main";
     }
 
-    @PostMapping("filter")
+    @PostMapping("/filter")
     public String filter(@RequestParam String filter, Map<String, Object> model) {
         Iterable<Message> messages;
         if (filter != null && !filter.isEmpty()) {
