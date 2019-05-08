@@ -28,7 +28,17 @@
             </#if>
         </ul>
 
-        <div class="navbar-text mr-3">${name}</div>
-        <@l.logout />
+        <#if user??>
+            <div class="navbar-text mr-3">${name}</div>
+            <@l.logout />
+        <#else>
+            <div style="padding-right: 20px">
+                <a class="btn btn-primary ma" href = "/login" >Sign In</a>
+            </div>
+            <div>
+                <a class="btn btn-secondary" href = "/registration" >Register</a>
+            </div>
+        </#if>
+
     </div>
 </nav>
